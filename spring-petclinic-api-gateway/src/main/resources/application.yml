@@ -25,7 +25,26 @@ spring:
           filters:
             - StripPrefix=2
 
-
+management:
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+    env:
+      show-values: always
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  wavefront:
+    application:
+      name: api-gateway
+    uri: http://telegraf-collector.tanzu-telegraf-collector.svc.cluster.local:2878
+    api-token: my-api-token
+  tracing:
+    sampling:
+      probability: 1.0
 
 ---
 spring:

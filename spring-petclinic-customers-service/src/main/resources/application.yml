@@ -4,6 +4,26 @@ spring:
   config:
     import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
 
+management:
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+    env:
+      show-values: always
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  wavefront:
+    application:
+      name: customers-service
+    uri: http://telegraf-collector.tanzu-telegraf-collector.svc.cluster.local:2878
+    api-token: my-api-token
+  tracing:
+    sampling:
+      probability: 1.0
 
 ---
 spring:
